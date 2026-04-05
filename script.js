@@ -1196,7 +1196,7 @@ function renderFeaturedProducts(featuredProds) {
 // ===================================
 
 // Configurazione globale backend
-const BACKEND_URL = 'http://localhost:3000/api';
+const BACKEND_URL = 'https://sito-shop-heavy-drop.vercel.app/api';
 
 // ===== 1. AVVIA IL CHECKOUT =====
 function startCheckout() {
