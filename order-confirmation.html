@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conferma Ordine - Heavy Drop</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .confirmation-container {
+            max-width: 800px;
+            margin: 60px auto;
+            padding: 50px 30px;
+            text-align: center;
+        }
+
+        .confirmation-header {
+            margin-bottom: 50px;
+        }
+
+        .confirmation-badge {
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: popIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            display: inline-block;
+        }
+
+        @keyframes popIn {
+            0% {
+                transform: scale(0) rotate(-20deg);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+        }
+
+        .confirmation-title {
+            font-size: 36px;
+            color: #2ecc71;
+            margin-bottom: 10px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .confirmation-subtitle {
+            font-size: 18px;
+            color: #aaa;
+            margin-bottom: 40px;
+            font-weight: 500;
+        }
+
+        .confirmation-details {
+            background: linear-gradient(135deg, #1a1a1a, #222222);
+            padding: 40px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            text-align: left;
+            border: 2px solid #2ecc71;
+            box-shadow: 0 8px 32px rgba(46, 204, 113, 0.15);
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 16px 0;
+            border-bottom: 1px solid #333;
+            font-size: 15px;
+            align-items: center;
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: #ddd;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .detail-value {
+            color: #aaa;
+            text-align: right;
+            max-width: 50%;
+            word-break: break-all;
+        }
+
+        .detail-value.important {
+            color: #2ecc71;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .confirmation-info {
+            background: rgba(52, 152, 219, 0.08);
+            border: 2px solid rgba(52, 152, 219, 0.3);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 30px;
+            color: #64b5f6;
+            animation: slideUp 0.7s ease-out;
+        }
+
+        .confirmation-info strong {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 16px;
+            color: #90caf9;
+        }
+
+        .confirmation-info p {
+            margin: 0;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .next-steps {
+            background: rgba(255, 152, 0, 0.08);
+            border: 2px solid rgba(255, 152, 0, 0.3);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 40px;
+            color: #ffb74d;
+            animation: slideUp 0.8s ease-out;
+        }
+
+        .next-steps h3 {
+            margin-top: 0;
+            color: #ffa726;
+            font-size: 18px;
+            margin-bottom: 16px;
+            font-weight: 700;
+        }
+
+        .next-steps ol {
+            text-align: left;
+            margin: 0;
+            padding-left: 24px;
+        }
+
+        .next-steps li {
+            margin-bottom: 12px;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .next-steps strong {
+            color: #ffb74d;
+        }
+
+        .confirmation-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary-conf,
+        .btn-secondary-conf {
+            padding: 14px 32px;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary-conf {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: white;
+            box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
+        }
+
+        .btn-primary-conf:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(46, 204, 113, 0.5);
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+        }
+
+        .btn-primary-conf:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary-conf {
+            background: #333;
+            color: white;
+            border: 2px solid #555;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-secondary-conf:hover {
+            background: #444;
+            border-color: #2ecc71;
+            color: #2ecc71;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(46, 204, 113, 0.2);
+        }
+
+        .btn-secondary-conf:active {
+            transform: translateY(0);
+        }
+
+        .loading {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            border: 3px solid rgba(46, 204, 113, 0.1);
+            border-top: 3px solid #2ecc71;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .error-container {
+            background: rgba(255, 68, 68, 0.1);
+            border: 2px solid #ff6b6b;
+            border-radius: 12px;
+            padding: 40px;
+            color: #ff6b6b;
+            margin-bottom: 40px;
+            text-align: center;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        .error-container h2 {
+            font-size: 28px;
+            margin-bottom: 16px;
+            color: #ff6b6b;
+        }
+
+        .error-container p {
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .confirmation-container {
+                margin: 30px auto;
+                padding: 30px 20px;
+            }
+
+            .confirmation-title {
+                font-size: 28px;
+            }
+
+            .confirmation-subtitle {
+                font-size: 16px;
+            }
+
+            .confirmation-badge {
+                font-size: 60px;
+            }
+
+            .confirmation-details {
+                padding: 24px;
+            }
+
+            .detail-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+
+            .detail-value {
+                max-width: 100%;
+                text-align: left;
+            }
+
+            .confirmation-actions {
+                flex-direction: column;
+            }
+
+            .btn-primary-conf,
+            .btn-secondary-conf {
+                width: 100%;
+            }
+
+            .confirmation-info,
+            .next-steps {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-top">
+            <div class="logo">
+                <img src="assets/logo.svg" alt="Heavy Drop" class="logo-img">
+            </div>
+            <button class="hamburger-menu" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav class="nav-primary" id="mobileMenu">
+                <a href="index.html" class="nav-link" onclick="closeMobileMenu()">Home</a>
+                <a href="product.html" class="nav-link" onclick="closeMobileMenu()">Prodotti</a>
+                <a href="cart.html" class="nav-link" onclick="closeMobileMenu()">🛒 Carrello <span class="cart-count">0</span></a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="confirmation-container">
+            <div id="loadingState">
+                <div class="loading" style="margin: 50px auto;"></div>
+                <p>Caricamento dettagli ordine...</p>
+            </div>
+
+            <div id="confirmationContent" style="display: none;">
+                <div class="confirmation-header">
+                    <div class="confirmation-badge">✅</div>
+                    <h1 class="confirmation-title">Ordine Confermato!</h1>
+                    <p class="confirmation-subtitle">Grazie per il tuo acquisto</p>
+                </div>
+
+                <div class="confirmation-details">
+                    <div class="detail-row">
+                        <span class="detail-label">📦 Numero Ordine:</span>
+                        <span class="detail-value important" id="orderNumber">-</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">📅 Data Ordine:</span>
+                        <span class="detail-value" id="orderDate">-</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">💰 Totale Pagato:</span>
+                        <span class="detail-value important" id="totalAmount">€0.00</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">📬 Indirizzo di Spedizione:</span>
+                        <span class="detail-value" id="shippingAddress">-</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">📧 Email Conferma:</span>
+                        <span class="detail-value" id="customerEmail">-</span>
+                    </div>
+                </div>
+
+                <div class="confirmation-info">
+                    <strong>✉️ Confermazione inviata via email</strong>
+                    Abbiamo inviato un'email di conferma al tuo indirizzo. Se non la vedi, controlla la cartella spam.
+                </div>
+
+                <div class="next-steps">
+                    <h3>📋 Prossimi Step</h3>
+                    <ol>
+                        <li><strong>Traccia la tua spedizione</strong> - Riceverai un link di tracking via email</li>
+                        <li><strong>Tempo di consegna</strong> - 3-5 giorni lavorativi per ordini in Italia</li>
+                        <li><strong>Supporto cliente</strong> - Contattaci se hai domande: info@heavydrop.com</li>
+                    </ol>
+                </div>
+
+                <div class="confirmation-actions">
+                    <a href="product.html" class="btn-primary-conf">🛍️ Continua lo Shopping</a>
+                    <a href="index.html" class="btn-secondary-conf">🏠 Torna alla Home</a>
+                </div>
+            </div>
+
+            <div id="errorContent" style="display: none;">
+                <div class="error-container">
+                    <h2>❌ Errore nel Caricamento</h2>
+                    <p id="errorMessage">Non è stato possibile caricare i dettagli dell'ordine.</p>
+                    <a href="cart.html" class="btn-secondary-conf" style="margin-top: 20px;">← Torna al Carrello</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p>&copy; 2026 Heavy Drop Shop. Tutti i diritti riservati (G.M. Programmatore).</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            loadOrderConfirmation();
+        });
+    </script>
+</body>
+</html>

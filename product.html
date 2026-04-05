@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prodotti - Heavy Drop</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-top">
+            <div class="logo">
+                <img src="assets/logo.svg" alt="Heavy Drop" class="logo-img">
+            </div>
+            <button class="hamburger-menu" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav class="nav-primary" id="mobileMenu">
+                <a href="index.html" class="nav-link" onclick="closeMobileMenu()">Home</a>
+                <a href="product.html" class="nav-link active" onclick="closeMobileMenu()">Prodotti</a>
+                <a href="cart.html" class="cart-link" onclick="closeMobileMenu()">🛒 Carrello <span class="cart-count">0</span></a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- BREADCRUMB -->
+        <div class="breadcrumb">
+            <a href="index.html">Home</a> / 
+            <span id="breadcrumbName">Prodotti</span>
+        </div>
+
+        <!-- PRODUCTS LIST SECTION -->
+        <section class="featured-section" id="productsListSection" style="display: none;">
+            <h2 id="categoryTitle">Prodotti</h2>
+            <div class="products-grid" id="productsGrid">
+                <!-- Prodotti generati da JavaScript -->
+            </div>
+        </section>
+
+        <!-- PRODUCT DETAIL SECTION -->
+        <section class="product-detail-container" id="productDetail" style="display: none;">
+            <!-- Il dettaglio del prodotto viene generato da JavaScript -->
+        </section>
+
+        <!-- RELATED PRODUCTS SECTION -->
+        <section class="featured-section" id="relatedSection" style="display: none;">
+            <h2>PRODOTTI CORRELATI</h2>
+            <div class="products-grid" id="relatedProducts">
+                <!-- Prodotti correlati generati da JavaScript -->
+            </div>
+        </section>
+    </main>
+
+    <!-- MODAL FULLSCREEN IMMAGINE -->
+    <div id="imageModal" class="image-modal">
+        <button class="modal-close" onclick="closeImageModal()">✕</button>
+        <div class="modal-content">
+            <img id="modalImage" class="modal-img" src="" alt="Immagine prodotto">
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p>&copy; 2026 Heavy Drop Shop. Tutti i diritti riservati (G.M. Programmatore).</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

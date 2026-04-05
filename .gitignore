@@ -1,0 +1,30 @@
+# Variabili d'ambiente (contiene API keys sensibili)
+backend/.env
+.env
+.env.local
+.env.*.local
+
+# Node modules
+backend/node_modules/
+node_modules/
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Log files
+*.log
+npm-debug.log*
+
+# Dati ordini (opzionale - se vuoi mantenerli privati)
+backend/orders.json
+
+# Cache
+.cache/
+dist/

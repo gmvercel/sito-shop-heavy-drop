@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heavy Drop - Shop</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-top">
+            <div class="logo">
+                <img src="assets/logo.svg" alt="Heavy Drop" class="logo-img">
+            </div>
+            <button class="hamburger-menu" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav class="nav-primary" id="mobileMenu">
+                <a href="index.html" class="nav-link active">Home</a>
+                <a href="#categories" class="nav-link" onclick="closeMobileMenu()">Shop</a>
+                <a href="product.html" class="nav-link" onclick="closeMobileMenu()">Prodotti</a>
+                <a href="cart.html" class="cart-link" onclick="closeMobileMenu()">🛒 Carrello <span class="cart-count">0</span></a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- HERO SECTION -->
+        <section class="hero">
+            <div class="hero-content">
+                <h2>COLLEZIONE EXCLUSIVE</h2>
+                <p>Abbigliamento e Merchandise del Brand Heavy Drop</p>
+                <a href="#categories" class="btn btn-primary">Scopri Subito</a>
+            </div>
+        </section>
+
+        <!-- CATEGORIES SECTION -->
+        <section class="categories-section" id="categories">
+            <h2>ESPLORA LE CATEGORIE</h2>
+            <div class="categories-grid">
+                <!-- Uomo -->
+                <div class="category-card" data-category="uomo" style="background-color: #2F2F2F;">
+                    <div class="category-card-content">
+                        <h3>UOMO</h3>
+                        <p>Collezione esclusiva</p>
+                        <a href="product.html?category=uomo" class="btn btn-secondary">Scopri</a>
+                    </div>
+                </div>
+
+                <!-- Donna -->
+                <div class="category-card" data-category="donna" style="background-color: #3A1F2F;">
+                    <div class="category-card-content">
+                        <h3>DONNA</h3>
+                        <p>Collezione esclusiva</p>
+                        <a href="product.html?category=donna" class="btn btn-secondary">Scopri</a>
+                    </div>
+                </div>
+
+                <!-- Bambino -->
+                <div class="category-card" data-category="bambino" style="background-color: #1F2A3A;">
+                    <div class="category-card-content">
+                        <h3>BAMBINO</h3>
+                        <p>Collezione esclusiva</p>
+                        <a href="product.html?category=bambino" class="btn btn-secondary">Scopri</a>
+                    </div>
+                </div>
+
+                <!-- Bambina -->
+                <div class="category-card" data-category="bambina" style="background-color: #3A1F3A;">
+                    <div class="category-card-content">
+                        <h3>BAMBINA</h3>
+                        <p>Collezione esclusiva</p>
+                        <a href="product.html?category=bambina" class="btn btn-secondary">Scopri</a>
+                    </div>
+                </div>
+
+                <!-- Scarpe -->
+                <div class="category-card" data-category="scarpe" style="background-color: #262626;">
+                    <div class="category-card-content">
+                        <h3>SCARPE</h3>
+                        <p>Collezione esclusiva</p>
+                        <a href="product.html?category=scarpe" class="btn btn-secondary">Scopri</a>
+                    </div>
+                </div>
+
+                <!-- Gadget -->
+                <div class="category-card" data-category="gadget" style="background-color: #1F3A2A;">
+                    <div class="category-card-content">
+                        <h3>GADGET</h3>
+                        <p>Collezione esclusiva</p>
+                        <a href="product.html?category=gadget" class="btn btn-secondary">Scopri</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FEATURED PRODUCTS -->
+        <section class="featured-section">
+            <h2>PRODOTTI IN EVIDENZA</h2>
+            <div class="products-grid" id="productsGrid">
+                <!-- I prodotti vengono generati da JavaScript -->
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p>&copy; 2026 Heavy Drop Shop. Tutti i diritti riservati (G.M. Programmatore).</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
