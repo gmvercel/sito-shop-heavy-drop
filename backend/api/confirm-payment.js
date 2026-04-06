@@ -18,7 +18,7 @@ export default async function handler(req, res) {
     }
 
     try {
-        const { paymentIntentId } = req.body;
+        const { paymentIntentId, customerData, cartData } = req.body;
 
         if (!paymentIntentId) {
             return res.status(400).json({
@@ -37,11 +37,21 @@ export default async function handler(req, res) {
             });
         }
 
+        // Ritorna i dati dell'ordine (non salvato su Vercel perché read-only)
+        // TODO: Implementare MongoDB per il salvataggio permanente
+        const orderId = `ORDER-${Date.now()}`;
+        
         res.status(200).json({
             success: true,
-            orderId: `ORDER-${Date.now()}`,
+            orderId: orderId,
             message: 'Pagamento confermato',
-            totalAmount: paymentIntent.amount / 100
+            order: {
+                id: orderId,
+                timestamp: new Date().toISOString(),
+                totalAmount: paymentIntent.amount / 100,
+                currency: paymentIntent.currency.toUpperCase(),
+                customer: customerData
+            }
         });
 
     } catch (error) {

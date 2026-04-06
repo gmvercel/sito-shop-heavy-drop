@@ -28,3 +28,5 @@ backend/orders.json
 # Cache
 .cache/
 dist/
+.vercel
+.env*.local

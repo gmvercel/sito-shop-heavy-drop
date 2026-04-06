@@ -1420,8 +1420,9 @@ async function handlePaymentSubmit(event) {
 
         console.log('[PAYMENT] ✅ Ordine creato:', confirmData.orderId);
 
-        // Salva l'ordine ID in sessionStorage come backup
+        // Salva l'ordine ID e i dati in sessionStorage
         sessionStorage.setItem('lastOrderId', confirmData.orderId);
+        sessionStorage.setItem('orderData', JSON.stringify(confirmData.order));
 
         // Svuota il carrello PRIMA del reindirizzamento
         cart = [];
@@ -1537,15 +1538,25 @@ async function loadOrderConfirmation() {
     }
 
     try {
-        // Recupera i dettagli dell'ordine dal backend
-        const response = await fetch(`${BACKEND_URL}/order/${orderId}`);
-        const data = await response.json();
+        let order = null;
 
-        if (!data.success) {
-            throw new Error(data.error || 'Ordine non trovato');
+        // PRIMO: Prova a leggere da sessionStorage (dati salvati dal frontend durante il pagamento)
+        const orderDataStr = sessionStorage.getItem('orderData');
+        if (orderDataStr) {
+            order = JSON.parse(orderDataStr);
+            console.log('[CONFIRMATION] ✅ Ordine caricato da sessionStorage');
+        } else {
+            // SECONDO: Se non in sessionStorage, recupera dal backend
+            console.log('[CONFIRMATION] Recuperando dall\'API...');
+            const response = await fetch(`${BACKEND_URL}/order/${orderId}`);
+            const data = await response.json();
+
+            if (!data.success) {
+                throw new Error(data.error || 'Ordine non trovato');
+            }
+
+            order = data.order;
         }
-
-        const order = data.order;
 
         // Popola la pagina di conferma
         document.getElementById('orderNumber').textContent = order.id;
