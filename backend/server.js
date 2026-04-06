@@ -8,28 +8,35 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // ===== MIDDLEWARE =====
-// Configura CORS per permettere localhost e Netlify frontend
+// Configura CORS per permettere frontend locali e Netlify
 const allowedOrigins = [
     'http://localhost',
     'http://127.0.0.1',
-    'https://heavydropsshop.netlify.app',
-    'http://localhost:3000',
-    'http://localhost:5500',
-    'http://localhost:8000'
+    'https://heavydropsshop.netlify.app'
 ];
 
 app.use(cors({
     origin: function(origin, callback) {
-        // Permetti localhost su qualunque porta e il dominio Netlify
-        if (!origin || allowedOrigins.some(allowed => origin && origin.includes(allowed))) {
-            callback(null, true);
-        } else {
-            callback(new Error('Not allowed by CORS'));
+        // Se non c'è origin (richieste server-to-server), permetti
+        if (!origin) {
+            return callback(null, true);
         }
+        
+        // Controlla se è localhost su qualunque porta
+        if (origin.startsWith('http://localhost') || origin.startsWith('http://127.0.0.1')) {
+            return callback(null, true);
+        }
+        
+        // Controlla l'elenco di origini permesse
+        if (allowedOrigins.includes(origin)) {
+            return callback(null, true);
+        }
+        
+        callback(new Error('CORS not allowed'));
     },
     credentials: true,
-    methods: ['GET', 'POST', 'OPTIONS'],
-    allowedHeaders: ['Content-Type']
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
 }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
