@@ -1,8 +1,8 @@
-require('dotenv').config();
-const express = require('express');
-const cors = require('cors');
-const bodyParser = require('body-parser');
-const paymentRoutes = require('./routes/payments');
+import 'dotenv/config.js';
+import express from 'express';
+import cors from 'cors';
+import bodyParser from 'body-parser';
+import paymentRoutes from './routes/payments.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -71,4 +71,4 @@ app.listen(PORT, () => {
     console.log(`📌 Make sure STRIPE_SECRET_KEY is set in .env file`);
 });
 
-module.exports = app;
+export default app;

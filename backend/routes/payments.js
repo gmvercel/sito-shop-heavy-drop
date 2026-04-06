@@ -1,8 +1,14 @@
-const express = require('express');
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-const fs = require('fs');
-const path = require('path');
+import express from 'express';
+import Stripe from 'stripe';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 const router = express.Router();
 
 // File per salvare gli ordini (MVP - non è un database vero)
@@ -235,4 +241,4 @@ router.get('/stripe-public-key', (req, res) => {
     });
 });
 
-module.exports = router;
+export default router;
