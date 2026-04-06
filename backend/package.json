@@ -2,6 +2,7 @@
   "name": "heavy-drop-payment-backend",
   "version": "1.0.0",
   "description": "Backend per gestire i pagamenti Stripe di Heavy Drop Shop",
+  "type": "module",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

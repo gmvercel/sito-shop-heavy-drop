@@ -1,19 +1,14 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "server.js",
-      "use": "@vercel/node"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "server.js"
-    }
-  ],
+  "buildCommand": "npm run build",
+  "devCommand": "node server.js",
   "env": {
     "STRIPE_SECRET_KEY": "@stripe_secret_key",
     "STRIPE_PUBLIC_KEY": "@stripe_public_key"
+  },
+  "functions": {
+    "api/**/*.js": {
+      "runtime": "nodejs18.x"
+    }
   }
 }
