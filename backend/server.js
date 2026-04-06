@@ -8,35 +8,25 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // ===== MIDDLEWARE =====
-// Configura CORS per permettere frontend locali e Netlify
-const allowedOrigins = [
-    'http://localhost',
-    'http://127.0.0.1',
-    'https://heavydropsshop.netlify.app'
-];
+// Aggiungi CORS headers PRIMA di tutto
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+    res.header('Access-Control-Max-Age', '86400');
+    
+    if (req.method === 'OPTIONS') {
+        return res.status(200).end();
+    }
+    next();
+});
 
+// Configura CORS per permettere frontend locali e Netlify
 app.use(cors({
-    origin: function(origin, callback) {
-        // Se non c'è origin (richieste server-to-server), permetti
-        if (!origin) {
-            return callback(null, true);
-        }
-        
-        // Controlla se è localhost su qualunque porta
-        if (origin.startsWith('http://localhost') || origin.startsWith('http://127.0.0.1')) {
-            return callback(null, true);
-        }
-        
-        // Controlla l'elenco di origini permesse
-        if (allowedOrigins.includes(origin)) {
-            return callback(null, true);
-        }
-        
-        callback(new Error('CORS not allowed'));
-    },
-    credentials: true,
+    origin: '*',
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization']
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: false
 }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
